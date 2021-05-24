@@ -1,62 +1,69 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+Si el cliente está autenticado, se visualizan más pestañas en el navegador y en la de panadería,  se visualiza el precio. La idea es que visualice el nombre del producto y el precio de la tabla productos.
+Hay un archivo panaderia2 que está en web_publica con un campo para introducir la cantidad pero no funciona
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Las pestañas de facturas y clientes están copiadas del git con alguna variación. He quitado el botón Editar y el de añadir, va a un formulario y he deshabilitado el botón de guardar. Volver a la página con el navegador.
 
-## About Laravel
+La pestaña empleados está generada sin vue. Funciona bien.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+La pestaña pedidos visualiza los pedidos si los hay. Hay un botón para hacer pedido que lleva al formulario y he deshabilitado el botón de guardar. Volver a la página con el navegador.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+La de productos, presenta la tabla de productos y en cantidad se puede modificar, pero la guarda en la tabla productos. La idea es que generara una línea de pedido.
+La tabla generé y la rellené phpMyAdmin. Adjunto productos.sql:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+CREATE TABLE `productos` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `articulo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `precio` double(8,2) NOT NULL,
+  `cantidad` int(10) UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-## Learning Laravel
+--
+-- Volcado de datos para la tabla `productos`
+--
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+INSERT INTO `productos` (`id`, `created_at`, `updated_at`, `articulo`, `slug`, `precio`, `cantidad`) VALUES
+(1, '2021-05-19 04:12:15', '2021-05-24 07:19:12', 'Barra', '', 0.85, 10),
+(2, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'Barra rústica', '', 1.50, 0),
+(3, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'Barra de integral', '', 1.20, 0),
+(4, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'Barra de espiga', '', 1.00, 0),
+(5, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'Pan sobao', '', 1.00, 0),
+(6, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'Pan de centeno y pasas', '', 2.00, 0),
+(7, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'Pan de molde', '', 1.20, 0),
+(8, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'Hogaza', '', 1.80, 0),
+(9, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'Hogaza integral', '', 2.50, 0),
+(10, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'Panecillo', '', 0.50, 0),
+(11, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'Tarta Sacher', '', 15.00, 0),
+(12, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'Tarta de queso', '', 10.00, 0),
+(13, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'Tarta tres chocolates', '', 12.00, 0),
+(14, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'Croisant', '', 1.00, 0),
+(15, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'Madalena', '', 1.50, 0),
+(16, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'Napolitana', '', 1.20, 0),
+(17, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'Palmera', '', 1.00, 0),
+(18, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'Tarta de manzana', '', 8.00, 0),
+(19, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'Empanada de carne', '', 3.50, 0),
+(20, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'Empanada de atún', '', 3.50, 0),
+(21, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'Empanada mini de verdura', '', 1.20, 0),
+(22, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'Empanada mini de carne', '', 1.50, 0),
+(23, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'articulo', '', 0.00, 0),
+(24, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'articulo', '', 0.00, 0),
+(25, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'articulo', '', 0.00, 0),
+(26, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'articulo', '', 0.00, 0),
+(27, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'articulo', '', 0.00, 0),
+(28, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'articulo', '', 0.00, 0),
+(29, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'articulo', '', 0.00, 0),
+(30, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'articulo', '', 0.00, 0),
+(31, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'articulo', '', 0.00, 0),
+(32, '2021-05-19 04:12:15', '2021-05-19 04:12:15', 'articulo', '', 0.00, 0);
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+--
+-- Índices para tablas volcadas
+--
 
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+--
+-- Indices de la tabla `productos`
+--
+ALTER TABLE `productos`
+  ADD PRIMARY KEY (`id`);
